@@ -1,0 +1,60 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "KamutechdbContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": "Data",
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "KamuTechApi",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[Articles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Cards]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Comments]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Component]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ComponentType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Photos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sliders]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "(localDb)\\MsSqllocaldb.KamuTechDb",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
