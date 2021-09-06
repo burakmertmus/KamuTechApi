@@ -1,4 +1,6 @@
+using AutoMapper;
 using KamuTechApi.Data;
+using KamuTechApi.Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +31,17 @@ namespace KamuTechApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<KamutechdbContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // Auto Mapper Configurations
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapperProfiles());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+            services.AddMvc();
             services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(c =>

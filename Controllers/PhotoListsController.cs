@@ -12,47 +12,47 @@ namespace KamuTechApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ComponentsController : ControllerBase
+    public class PhotoListsController : ControllerBase
     {
         private readonly KamutechdbContext _context;
 
-        public ComponentsController(KamutechdbContext context)
+        public PhotoListsController(KamutechdbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Components
+        // GET: api/PhotoLists
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Component>>> GetComponent()
+        public async Task<ActionResult<IEnumerable<PhotoList>>> GetPhotoList()
         {
-            return await _context.Component.ToListAsync();
+            return await _context.PhotoList.ToListAsync();
         }
 
-        // GET: api/Components/5
+        // GET: api/PhotoLists/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Component>> GetComponent(int id)
+        public async Task<ActionResult<PhotoList>> GetPhotoList(int id)
         {
-            var component = await _context.Component.FindAsync(id);
+            var photoList = await _context.PhotoList.FindAsync(id);
 
-            if (component == null)
+            if (photoList == null)
             {
                 return NotFound();
             }
 
-            return component;
+            return photoList;
         }
 
-        // PUT: api/Components/5
+        // PUT: api/PhotoLists/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutComponent(int id, Component component)
+        public async Task<IActionResult> PutPhotoList(int id, PhotoList photoList)
         {
-            if (id != component.Id)
+            if (id != photoList.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(component).State = EntityState.Modified;
+            _context.Entry(photoList).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace KamuTechApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ComponentExists(id))
+                if (!PhotoListExists(id))
                 {
                     return NotFound();
                 }
@@ -73,19 +73,19 @@ namespace KamuTechApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Components
+        // POST: api/PhotoLists
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Component>> PostComponent(Component component)
+        public async Task<ActionResult<PhotoList>> PostPhotoList(PhotoList photoList)
         {
-            _context.Component.Add(component);
+            _context.PhotoList.Add(photoList);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (ComponentExists(component.Id))
+                if (PhotoListExists(photoList.Id))
                 {
                     return Conflict();
                 }
@@ -95,28 +95,28 @@ namespace KamuTechApi.Controllers
                 }
             }
 
-            return CreatedAtAction("GetComponent", new { id = component.Id }, component);
+            return CreatedAtAction("GetPhotoList", new { id = photoList.Id }, photoList);
         }
 
-        // DELETE: api/Components/5
+        // DELETE: api/PhotoLists/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteComponent(int id)
+        public async Task<IActionResult> DeletePhotoList(int id)
         {
-            var component = await _context.Component.FindAsync(id);
-            if (component == null)
+            var photoList = await _context.PhotoList.FindAsync(id);
+            if (photoList == null)
             {
                 return NotFound();
             }
 
-            _context.Component.Remove(component);
+            _context.PhotoList.Remove(photoList);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ComponentExists(int id)
+        private bool PhotoListExists(int id)
         {
-            return _context.Component.Any(e => e.Id == id);
+            return _context.PhotoList.Any(e => e.Id == id);
         }
     }
 }

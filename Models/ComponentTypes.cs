@@ -6,9 +6,16 @@ using System.Collections.Generic;
 
 namespace KamuTechApi.Models
 {
-    public partial class ComponentType
+    public partial class ComponentTypes
     {
+        public ComponentTypes()
+        {
+            PhotoList = new HashSet<PhotoList>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public virtual ICollection<PhotoList> PhotoList { get; set; }
     }
 }

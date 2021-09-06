@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace KamuTechApi.RequestModel
 {
-    public class getCommentsModel
+    public class GetCommentsModel
     {
-        public Photos Photo { get; set; }
+        
         public int ComponetId { get; set; }
+        public string PhotoUrl { get; set; }
         public string CommentPost { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Position { get; set; }
         public string Organisation { get; set; }
+
     }
 }

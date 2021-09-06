@@ -9,8 +9,10 @@ namespace KamuTechApi.Models
     public partial class Cards
     {
         public int Id { get; set; }
-        public int ComponentId { get; set; }
+        public int PhotoId { get; set; }
         public string Header { get; set; }
         public string Content { get; set; }
+
+        public virtual PhotoList Photo { get; set; }
     }
 }

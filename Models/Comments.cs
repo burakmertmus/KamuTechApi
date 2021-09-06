@@ -9,11 +9,13 @@ namespace KamuTechApi.Models
     public partial class Comments
     {
         public int Id { get; set; }
-        public int ComponetId { get; set; }
+        public int PhotoId { get; set; }
         public string CommentPost { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Position { get; set; }
         public string Organisation { get; set; }
+
+        public virtual PhotoList Photo { get; set; }
     }
 }

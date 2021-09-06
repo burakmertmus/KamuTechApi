@@ -26,11 +26,11 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Component]",
+         "Name": "[dbo].[ComponentTypes]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[ComponentType]",
+         "Name": "[dbo].[PhotoList]",
          "ObjectType": 0
       },
       {
@@ -42,15 +42,16 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "(localDb)\\MsSqllocaldb.KamuTechDb",
+   "UiHint": "(localDb)\\MsSqllocaldb.KamuTechDbUdated",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
-   "UseDbContextSplitting": false,
+   "UseDbContextSplitting": true,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,
    "UseInflector": false,
    "UseLegacyPluralizer": false,
    "UseNoConstructor": false,
+   "UseNoDefaultConstructor": true,
    "UseNoNavigations": false,
    "UseNoObjectFilter": false,
    "UseNodaTime": false,

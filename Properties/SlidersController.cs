@@ -8,51 +8,51 @@ using Microsoft.EntityFrameworkCore;
 using KamuTechApi.Data;
 using KamuTechApi.Models;
 
-namespace KamuTechApi.Controllers
+namespace KamuTechApi.Properties
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ComponentTypesController : ControllerBase
+    public class SlidersController : ControllerBase
     {
         private readonly KamutechdbContext _context;
 
-        public ComponentTypesController(KamutechdbContext context)
+        public SlidersController(KamutechdbContext context)
         {
             _context = context;
         }
 
-        // GET: api/ComponentTypes
+        // GET: api/Sliders
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ComponentTypes>>> GetComponentTypes()
+        public async Task<ActionResult<IEnumerable<Sliders>>> GetSliders()
         {
-            return await _context.ComponentTypes.ToListAsync();
+            return await _context.Sliders.ToListAsync();
         }
 
-        // GET: api/ComponentTypes/5
+        // GET: api/Sliders/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ComponentTypes>> GetComponentTypes(int id)
+        public async Task<ActionResult<Sliders>> GetSliders(int id)
         {
-            var componentTypes = await _context.ComponentTypes.FindAsync(id);
+            var sliders = await _context.Sliders.FindAsync(id);
 
-            if (componentTypes == null)
+            if (sliders == null)
             {
                 return NotFound();
             }
 
-            return componentTypes;
+            return sliders;
         }
 
-        // PUT: api/ComponentTypes/5
+        // PUT: api/Sliders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutComponentTypes(int id, ComponentTypes componentTypes)
+        public async Task<IActionResult> PutSliders(int id, Sliders sliders)
         {
-            if (id != componentTypes.Id)
+            if (id != sliders.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(componentTypes).State = EntityState.Modified;
+            _context.Entry(sliders).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace KamuTechApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ComponentTypesExists(id))
+                if (!SlidersExists(id))
                 {
                     return NotFound();
                 }
@@ -73,19 +73,19 @@ namespace KamuTechApi.Controllers
             return NoContent();
         }
 
-        // POST: api/ComponentTypes
+        // POST: api/Sliders
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ComponentTypes>> PostComponentTypes(ComponentTypes componentTypes)
+        public async Task<ActionResult<Sliders>> PostSliders(Sliders sliders)
         {
-            _context.ComponentTypes.Add(componentTypes);
+            _context.Sliders.Add(sliders);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (ComponentTypesExists(componentTypes.Id))
+                if (SlidersExists(sliders.Id))
                 {
                     return Conflict();
                 }
@@ -95,28 +95,28 @@ namespace KamuTechApi.Controllers
                 }
             }
 
-            return CreatedAtAction("GetComponentTypes", new { id = componentTypes.Id }, componentTypes);
+            return CreatedAtAction("GetSliders", new { id = sliders.Id }, sliders);
         }
 
-        // DELETE: api/ComponentTypes/5
+        // DELETE: api/Sliders/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteComponentTypes(int id)
+        public async Task<IActionResult> DeleteSliders(int id)
         {
-            var componentTypes = await _context.ComponentTypes.FindAsync(id);
-            if (componentTypes == null)
+            var sliders = await _context.Sliders.FindAsync(id);
+            if (sliders == null)
             {
                 return NotFound();
             }
 
-            _context.ComponentTypes.Remove(componentTypes);
+            _context.Sliders.Remove(sliders);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ComponentTypesExists(int id)
+        private bool SlidersExists(int id)
         {
-            return _context.ComponentTypes.Any(e => e.Id == id);
+            return _context.Sliders.Any(e => e.Id == id);
         }
     }
 }
