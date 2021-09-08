@@ -133,6 +133,8 @@ namespace KamuTechApi.Controllers
             return NoContent();
         }
 
+
+
         private bool CardsExists(int id)
         {
             return _context.Cards.Any(e => e.Id == id);
