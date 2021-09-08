@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using KamuTechApi.Data;
 using KamuTechApi.Models;
+using AutoMapper;
+using KamuTechApi.RequestModel;
 
 namespace KamuTechApi.Controllers
 {
@@ -15,17 +17,20 @@ namespace KamuTechApi.Controllers
     public class CardsController : ControllerBase
     {
         private readonly KamutechdbContext _context;
-
-        public CardsController(KamutechdbContext context)
+        private readonly IMapper _mapper;
+        public CardsController(KamutechdbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Cards
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cards>>> GetCards()
+        public async Task<ActionResult<IEnumerable<GetCardsModel>>> GetCards()
         {
-            return await _context.Cards.ToListAsync();
+            var cards = await _context.Cards.Include(p => p.Photo.IdNavigation).ToListAsync();
+            var reqCards = _mapper.Map<List<GetCardsModel>>(cards);
+            return Ok(reqCards);
         }
 
         // GET: api/Cards/5
@@ -45,14 +50,24 @@ namespace KamuTechApi.Controllers
         // PUT: api/Cards/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCards(int id, Cards cards)
+        public async Task<IActionResult> PutCards(int id, UpdateCardModel updateCardModel)
         {
-            if (id != cards.Id)
+            
+            var card = await _context.Cards.Include(p => p.Photo.IdNavigation).FirstOrDefaultAsync(p=>p.Id==id);
+
+            if (card == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(cards).State = EntityState.Modified;
+
+            card.Photo.IdNavigation.Url = updateCardModel.PhotoUrl;
+            card.Content = updateCardModel.Content;
+            card.Header = updateCardModel.Header;
+            
+
+
+            _context.Entry(card).State = EntityState.Modified;
 
             try
             {
@@ -78,10 +93,13 @@ namespace KamuTechApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Cards>> PostCards(Cards cards)
         {
+
             _context.Cards.Add(cards);
             try
             {
+                
                 await _context.SaveChangesAsync();
+                
             }
             catch (DbUpdateException)
             {
@@ -94,6 +112,7 @@ namespace KamuTechApi.Controllers
                     throw;
                 }
             }
+
 
             return CreatedAtAction("GetCards", new { id = cards.Id }, cards);
         }

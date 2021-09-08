@@ -12,7 +12,31 @@ namespace KamuTechApi.Helper
     {
         public AutoMapperProfiles()
         {
-           
+            CreateMap<Comments, GetCommentsModel>()
+                .ForMember(dest => dest.ComponentId, opt =>
+            {
+                opt.MapFrom(src => src.Photo.Id);
+            }).ForMember(dest => dest.PhotoUrl, opt =>
+            {
+                opt.MapFrom(src => src.Photo.IdNavigation.Url);
+            });
+                
+            CreateMap<GetCommentsModel, Comments>();
+
+
+            CreateMap<Cards, GetCardsModel>()
+                .ForMember(dest => dest.ComponentId, opt =>
+            {
+                opt.MapFrom(src => src.Photo.Id);
+            }).ForMember(dest => dest.PhotoUrl, opt =>
+            {
+                opt.MapFrom(src => src.Photo.IdNavigation.Url);
+            }); ;
+
+            CreateMap<GetCardsModel, Cards>();
+            
+
+
         }
     }
 }

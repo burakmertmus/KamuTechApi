@@ -9,13 +9,12 @@ namespace KamuTechApi.RequestModel
     public class GetCommentsModel
     {
         
-        public int ComponetId { get; set; }
+        public int ComponentId { get; set; }
         public string PhotoUrl { get; set; }
         public string CommentPost { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Position { get; set; }
         public string Organisation { get; set; }
-
     }
 }

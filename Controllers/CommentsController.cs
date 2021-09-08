@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using KamuTechApi.Data;
 using KamuTechApi.Models;
+using AutoMapper;
+using KamuTechApi.RequestModel;
 
 namespace KamuTechApi.Controllers
 {
@@ -15,17 +17,20 @@ namespace KamuTechApi.Controllers
     public class CommentsController : ControllerBase
     {
         private readonly KamutechdbContext _context;
-
-        public CommentsController(KamutechdbContext context)
+        private readonly IMapper _mapper;
+        public CommentsController(KamutechdbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Comments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Comments>>> GetComments()
+        public async Task<ActionResult<IEnumerable<GetCommentsModel>>> GetComments()
         {
-            return await _context.Comments.ToListAsync();
+            var comments = await _context.Comments.Include(p=>p.Photo.IdNavigation).ToListAsync();
+            var reqCom= _mapper.Map<List<GetCommentsModel>>(comments);
+            return Ok(reqCom);
         }
 
         // GET: api/Comments/5
